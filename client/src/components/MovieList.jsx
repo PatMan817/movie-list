@@ -3,11 +3,11 @@ import MovieListEntry from './MovieListEntry.jsx'
 
 const MovieList = (props) => {
   return (
-    <ol className="movie-list">
+    <ul className="movie-list">
       {props.movies.map((movie) => (
         <MovieListEntry movie={movie} clickHandler={props.clickHandler}/>
       ))}
-    </ol>
+    </ul>
   );
 };
 

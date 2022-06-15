@@ -1,3 +1,12 @@
 body {
   font-family: sans-serif, arial;
 }
+
+#searchbar-div {
+  padding-top: 15px;
+}
+
+.watched-button {
+  font-size: 7pt;
+  margin-left: 10px;
+}
