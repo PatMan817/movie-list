@@ -16,7 +16,6 @@ class App extends React.Component {
     this.activeList = this.state.unwatchedMovies;
 
     this.addMovieData = this.addMovieData.bind(this);
-    this.clickHandler = this.clickHandler.bind(this);
     this.searchHandler = this.searchHandler.bind(this);
     this.addMovie = this.addMovie.bind(this);
     this.toggleWatched = this.toggleWatched.bind(this);
