@@ -8,38 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      watchedMovies: [
-        //{title: 'Mean Girls',
-        //runtime: '100 min',
-        //metaScore: 70,
-        //imdbRating: 8,
-        //watched: true},
-//
-        //{title: 'Sunshine',
-        //runtime: '90 min',
-        //metaScore: 75,
-        //imdbRating: 8.2,
-        //watched: true}
-      ],
-      unwatchedMovies: [
-        //{title: 'Hackers',
-        //runtime: '102 min',
-        //metaScore: 50,
-        //imdbRating: 6.5,
-        //watched: false},
-//
-        //{title: 'The Grey',
-        //runtime: '120 min',
-        //metaScore: 60,
-        //imdbRating: 7,
-        //watched: false},
-//
-        //{title: 'Ex Machina',
-        //runtime: '107 min',
-        //metaScore: 90,
-        //imdbRating: 9.4,
-        //watched: false}
-      ],
+      watchedMovies: [],
+      unwatchedMovies: [],
       rerender: 0
     }
 
@@ -64,16 +34,9 @@ class App extends React.Component {
   }
 
   addMovie(enteredMovie, data) {
-    //var enteredMovie = document.getElementById("addmoviebar").value;
     var newState = this.state;
-    //var data = this.searchMovieData(enteredMovie);
     newState.unwatchedMovies.push({title: data.original_title, watched: false, movieData: data});
     this.setState(newState);
-    //document.getElementById("addmoviebar").value = '';
-  }
-
-  clickHandler(event) {
-    console.log(event.target);
   }
 
   //componentDidMount() {
@@ -150,10 +113,10 @@ class App extends React.Component {
           <h1>Movie List</h1>
         </header>
         <div>
-          <AddMovie addMovieData={this.addMovieData} clickHandler={this.clickHandler}/>
+          <AddMovie addMovieData={this.addMovieData}/>
         </div>
         <nav>
-          <Search clickHandler={this.clickHandler} searchHandler={this.searchHandler}/>
+          <Search searchHandler={this.searchHandler}/>
         </nav>
         <main>
           <MovieList swapActiveList={this.swapActiveList} activeList={this.activeList} toggleWatched={this.toggleWatched} toggleInfo={this.toggleInfo}/>

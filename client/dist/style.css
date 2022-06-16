@@ -8,7 +8,6 @@ body {
 
 .watched-button {
   font-size: 7pt;
-  /*margin-left: 10px;*/
 }
 
 .movie-list {
@@ -25,4 +24,8 @@ body {
 
 .hidden {
   display: none;
+}
+
+#to-watch-button {
+  margin-left: 5px;
 }
