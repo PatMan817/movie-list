@@ -3,10 +3,18 @@ body {
 }
 
 #searchbar-div {
-  padding-top: 15px;
+  margin-top: 15px;
 }
 
 .watched-button {
   font-size: 7pt;
   margin-left: 10px;
+}
+
+.movie-list {
+  margin-top: 20px;
+}
+
+.watched {
+  background-color: yellowgreen;
 }

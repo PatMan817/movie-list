@@ -3,11 +3,15 @@ import MovieListEntry from './MovieListEntry.jsx'
 
 const MovieList = (props) => {
   return (
-    <ul className="movie-list">
-      {props.movies.map((movie) => (
-        <MovieListEntry movie={movie} clickHandler={props.clickHandler}/>
-      ))}
-    </ul>
+    <div className="movie-list">
+      <button onClick={props.swapActiveList}>Watched</button>
+      <button onClick={props.swapActiveList}>To Watch</button>
+      <ul className="movie-list-items">
+        {props.activeList.map((movie) => (
+          <MovieListEntry movie={movie} toggleWatched={props.toggleWatched}/>
+        ))}
+      </ul>
+    </div>
   );
 };
 
