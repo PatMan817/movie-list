@@ -9,42 +9,43 @@ class App extends React.Component {
     super(props)
     this.state = {
       watchedMovies: [
-        {title: 'Mean Girls',
-        runtime: '100 min',
-        metaScore: 70,
-        imdbRating: 8,
-        watched: true},
-
-        {title: 'Sunshine',
-        runtime: '90 min',
-        metaScore: 75,
-        imdbRating: 8.2,
-        watched: true}
+        //{title: 'Mean Girls',
+        //runtime: '100 min',
+        //metaScore: 70,
+        //imdbRating: 8,
+        //watched: true},
+//
+        //{title: 'Sunshine',
+        //runtime: '90 min',
+        //metaScore: 75,
+        //imdbRating: 8.2,
+        //watched: true}
       ],
       unwatchedMovies: [
-        {title: 'Hackers',
-        runtime: '102 min',
-        metaScore: 50,
-        imdbRating: 6.5,
-        watched: false},
-
-        {title: 'The Grey',
-        runtime: '120 min',
-        metaScore: 60,
-        imdbRating: 7,
-        watched: false},
-
-        {title: 'Ex Machina',
-        runtime: '107 min',
-        metaScore: 90,
-        imdbRating: 9.4,
-        watched: false}
+        //{title: 'Hackers',
+        //runtime: '102 min',
+        //metaScore: 50,
+        //imdbRating: 6.5,
+        //watched: false},
+//
+        //{title: 'The Grey',
+        //runtime: '120 min',
+        //metaScore: 60,
+        //imdbRating: 7,
+        //watched: false},
+//
+        //{title: 'Ex Machina',
+        //runtime: '107 min',
+        //metaScore: 90,
+        //imdbRating: 9.4,
+        //watched: false}
       ],
       rerender: 0
     }
 
-    this.activeList = this.state.watchedMovies;
+    this.activeList = this.state.unwatchedMovies;
 
+    this.addMovieData = this.addMovieData.bind(this);
     this.clickHandler = this.clickHandler.bind(this);
     this.searchHandler = this.searchHandler.bind(this);
     this.addMovie = this.addMovie.bind(this);
@@ -53,12 +54,22 @@ class App extends React.Component {
     this.toggleInfo = this.toggleInfo.bind(this);
   }
 
-  addMovie() {
-    var enteredValue = document.getElementById("addmoviebar").value;
-    var newState = this.state;
-    newState.unwatchedMovies.push({title: enteredValue, watched: false});
-    this.setState(newState);
+  addMovieData() {
+    var enteredMovie = document.getElementById("addmoviebar").value;
+    if (!enteredMovie) {
+      return;
+    }
+    getData(enteredMovie, this.addMovie.bind(this, enteredMovie));
     document.getElementById("addmoviebar").value = '';
+  }
+
+  addMovie(enteredMovie, data) {
+    //var enteredMovie = document.getElementById("addmoviebar").value;
+    var newState = this.state;
+    //var data = this.searchMovieData(enteredMovie);
+    newState.unwatchedMovies.push({title: data.original_title, watched: false, movieData: data});
+    this.setState(newState);
+    //document.getElementById("addmoviebar").value = '';
   }
 
   clickHandler(event) {
@@ -68,12 +79,12 @@ class App extends React.Component {
   //componentDidMount() {
   //  this.searchMovieData('test')
   //}
-//
-  //searchMovieData(query) {
-  //  getData(query, (movieData) => {
-  //    this.setState({movies: movieData})
-  //  });
-  //}
+
+  searchMovieData(query) {
+    getData(query, (movieData) => {
+      this.setState({movies: movieData})
+    });
+  }
 
   searchHandler() {
     var searchedValue = document.getElementById("searchbar").value;
@@ -91,8 +102,12 @@ class App extends React.Component {
     var clickedButton = event.target.innerText
     if (clickedButton === 'Watched') {
       this.activeList = this.state.watchedMovies;
+      event.target.classList.add('watched')
+      document.getElementById('to-watch-button').classList.remove('watched')
     } else {
       this.activeList = this.state.unwatchedMovies;
+      event.target.classList.add('watched')
+      document.getElementById('watched-list-button').classList.remove('watched')
     }
     this.setState({rerender: 0})
   }
@@ -129,14 +144,13 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.getData)
     return (
       <div>
         <header>
           <h1>Movie List</h1>
         </header>
         <div>
-          <AddMovie addMovie={this.addMovie} clickHandler={this.clickHandler}/>
+          <AddMovie addMovieData={this.addMovieData} clickHandler={this.clickHandler}/>
         </div>
         <nav>
           <Search clickHandler={this.clickHandler} searchHandler={this.searchHandler}/>
