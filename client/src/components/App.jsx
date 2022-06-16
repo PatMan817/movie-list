@@ -48,12 +48,13 @@ class App extends React.Component {
   searchHandler() {
     var searchedValue = document.getElementById("searchbar").value;
     var movieResults = [];
-    for (var movie of this.state.allMovies) {
+    for (var movie of this.activeList) {
       if ((movie.title.toLowerCase()).includes(searchedValue.toLowerCase())) {
         movieResults.push(movie);
       };
     }
-    this.setState({movies: movieResults})
+    this.activeList = movieResults
+    this.setState({rerender: 0})
   }
 
   swapActiveList(event) {
