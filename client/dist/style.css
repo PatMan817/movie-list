@@ -8,13 +8,21 @@ body {
 
 .watched-button {
   font-size: 7pt;
-  margin-left: 10px;
+  /*margin-left: 10px;*/
 }
 
 .movie-list {
   margin-top: 20px;
 }
 
+.movie-list-entry {
+  margin-bottom: 10px;
+}
+
 .watched {
   background-color: yellowgreen;
+}
+
+.hidden {
+  display: none;
 }

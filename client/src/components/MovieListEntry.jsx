@@ -3,14 +3,26 @@ import React from 'react';
 const MovieListEntry = (props) => {
   if (props.movie.watched) {
     return (
-      <li className="movie-list-entry">{props.movie.title}
-        <button className="watched-button watched" id={props.movie.title} onClick={props.toggleWatched}>Watched</button>
+      <li className="movie-list-entry">
+        <span onClick={props.toggleInfo}>{props.movie.title}</span><br/>
+        <div className="movie-list-entry-info hidden" id={props.movie.title}>
+          <span><b>Runtime:</b> {props.movie.runtime}</span><br/>
+          <span><b>MetaScore:</b> {props.movie.metaScore}</span><br/>
+          <span><b>IMDb Rating:</b> {props.movie.imdbRating}</span><br/>
+          <button className="watched-button watched"  onClick={props.toggleWatched}>Watched</button>
+        </div>
       </li>
     )
   } else {
     return (
-      <li className="movie-list-entry">{props.movie.title}
-        <button className="watched-button" id={props.movie.title} onClick={props.toggleWatched}>Watched</button>
+      <li className="movie-list-entry">
+        <span onClick={props.toggleInfo}>{props.movie.title}</span><br/>
+        <div className="movie-list-entry-info hidden" id={props.movie.title}>
+          <span><b>Runtime:</b> {props.movie.runtime}</span><br/>
+          <span><b>MetaScore:</b> {props.movie.metaScore}</span><br/>
+          <span><b>IMDb Rating:</b> {props.movie.imdbRating}</span><br/>
+          <button className="watched-button"  onClick={props.toggleWatched}>Watched</button>
+        </div>
       </li>
     )
   }

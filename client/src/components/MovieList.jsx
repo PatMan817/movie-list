@@ -8,7 +8,7 @@ const MovieList = (props) => {
       <button onClick={props.swapActiveList}>To Watch</button>
       <ul className="movie-list-items">
         {props.activeList.map((movie) => (
-          <MovieListEntry movie={movie} toggleWatched={props.toggleWatched}/>
+          <MovieListEntry movie={movie} toggleWatched={props.toggleWatched} toggleInfo={props.toggleInfo}/>
         ))}
       </ul>
     </div>

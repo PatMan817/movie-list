@@ -2,6 +2,7 @@ import React from 'react';
 import MovieList from './MovieList.jsx';
 import Search from './Search.jsx';
 import AddMovie from './AddMovie.jsx';
+import getData from '../../lib/getData.js';
 
 class App extends React.Component {
   constructor(props) {
@@ -9,17 +10,35 @@ class App extends React.Component {
     this.state = {
       watchedMovies: [
         {title: 'Mean Girls',
-      watched: true},
+        runtime: '100 min',
+        metaScore: 70,
+        imdbRating: 8,
+        watched: true},
+
         {title: 'Sunshine',
-      watched: true}
+        runtime: '90 min',
+        metaScore: 75,
+        imdbRating: 8.2,
+        watched: true}
       ],
       unwatchedMovies: [
         {title: 'Hackers',
-      watched: false},
+        runtime: '102 min',
+        metaScore: 50,
+        imdbRating: 6.5,
+        watched: false},
+
         {title: 'The Grey',
-      watched: false},
+        runtime: '120 min',
+        metaScore: 60,
+        imdbRating: 7,
+        watched: false},
+
         {title: 'Ex Machina',
-      watched: false}
+        runtime: '107 min',
+        metaScore: 90,
+        imdbRating: 9.4,
+        watched: false}
       ],
       rerender: 0
     }
@@ -31,6 +50,7 @@ class App extends React.Component {
     this.addMovie = this.addMovie.bind(this);
     this.toggleWatched = this.toggleWatched.bind(this);
     this.swapActiveList = this.swapActiveList.bind(this);
+    this.toggleInfo = this.toggleInfo.bind(this);
   }
 
   addMovie() {
@@ -42,8 +62,18 @@ class App extends React.Component {
   }
 
   clickHandler(event) {
-    console.log(event.target.innerText);
+    console.log(event.target);
   }
+
+  //componentDidMount() {
+  //  this.searchMovieData('test')
+  //}
+//
+  //searchMovieData(query) {
+  //  getData(query, (movieData) => {
+  //    this.setState({movies: movieData})
+  //  });
+  //}
 
   searchHandler() {
     var searchedValue = document.getElementById("searchbar").value;
@@ -67,9 +97,17 @@ class App extends React.Component {
     this.setState({rerender: 0})
   }
 
+  toggleInfo(event) {
+    var targetDiv = document.getElementById(event.target.innerText);
+    if (targetDiv.classList.contains('hidden')) {
+      targetDiv.classList.remove('hidden')
+    } else {
+      targetDiv.classList.add('hidden')
+    }
+  }
+
   toggleWatched(event) {
-    var clickedMovieName = event.target.parentNode.innerText;
-    clickedMovieName = clickedMovieName.slice(0, clickedMovieName.length - 7)
+    var clickedMovieName = event.target.parentNode.id;
     for (var i = 0; i < this.state.watchedMovies.length; i++) {
       if (this.state.watchedMovies[i].title === clickedMovieName) {
         var swappedMovie = this.state.watchedMovies.splice(i, 1)[0];
@@ -91,6 +129,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.getData)
     return (
       <div>
         <header>
@@ -103,7 +142,7 @@ class App extends React.Component {
           <Search clickHandler={this.clickHandler} searchHandler={this.searchHandler}/>
         </nav>
         <main>
-          <MovieList swapActiveList={this.swapActiveList} activeList={this.activeList} toggleWatched={this.toggleWatched}/>
+          <MovieList swapActiveList={this.swapActiveList} activeList={this.activeList} toggleWatched={this.toggleWatched} toggleInfo={this.toggleInfo}/>
         </main>
       </div>
     )
